@@ -1,0 +1,2 @@
+
+nvcc -o ray ray.cu -lglut -lGLU -lGL

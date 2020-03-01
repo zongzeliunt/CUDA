@@ -1,0 +1,5 @@
+编译命令：nvcc
+
+
+加入openGL的库函数：
+nvcc -o heat heat.cu -lglut -lGLU -lGL

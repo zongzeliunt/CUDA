@@ -1,0 +1,1 @@
+nvcc -o heat heat.cu -lglut -lGLU -lGL

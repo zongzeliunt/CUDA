@@ -1,0 +1,4 @@
+-lGL 如果找不到：
+sudo apt install --reinstall libglvnd-dev
+
+nvcc julia_gpu.cu -lGLU -lGL -lglut
