@@ -20,6 +20,7 @@
 
 __global__ void add( int *a, int *b, int *c ) {
     int tid = blockIdx.x;    // this thread handles the data at its thread id
+	//x是进程ID，N是外面定义的
     if (tid < N)
         c[tid] = a[tid] + b[tid];
 }
@@ -47,6 +48,7 @@ int main( void ) {
 
     add<<<N,1>>>( dev_a, dev_b, dev_c );
     //要是改成以下代码，则后5个就跑不出结果了
+	//<<<N,1>>>是N个进程每个跑一次
 	//add<<<N/2,2>>>( dev_a, dev_b, dev_c );
 
     // copy the array 'c' back from the GPU to the CPU

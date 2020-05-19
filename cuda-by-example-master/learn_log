@@ -3,3 +3,28 @@
 
 加入openGL的库函数：
 nvcc -o heat heat.cu -lglut -lGLU -lGL
+
+Chapter03:
+	simple_device_call.cu
+	建立一段内存：
+		HANDLE_ERROR( cudaMalloc( (void**)&dev_c, sizeof(int) ) );
+	Call 函数：
+		add<<<1,1>>>( 2, 7, dev_c );
+	结果拷回来：
+		HANDLE_ERROR( cudaMemcpy( &c, dev_c, sizeof(int),cudaMemcpyDeviceToHost ));
+		
+
+
+Chapter04:
+	julia_gpu.cu:
+		dim3    grid(DIM,DIM);
+		根据书上P72所写，dim3是一个CUDA库中的三维tuple（元组）。
+		现在CUDA必须要用dim3，这是书里写的
+		kernel里面有
+			int x = blockIdx.x;
+    		int y = blockIdx.y;
+		看来blockIdx还分x,y
+		个人估计这个xy应该是dim3定义的
+		__device__ 类函数是在GPU上跑的，只能被__device__类函数或者__global__类函数调用
+
+

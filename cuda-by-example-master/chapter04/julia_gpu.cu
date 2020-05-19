@@ -82,6 +82,8 @@ int main( void ) {
     data.dev_bitmap = dev_bitmap;
 
     dim3    grid(DIM,DIM);
+	//个人理解：grid就是DIM相乘，即1000×1000
+	//kernel执行时，就是这1000×1000个进程一起工作
     kernel<<<grid,1>>>( dev_bitmap );
 
     HANDLE_ERROR( cudaMemcpy( bitmap.get_ptr(), dev_bitmap,
