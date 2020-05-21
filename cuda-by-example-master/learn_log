@@ -27,4 +27,41 @@ Chapter04:
 		个人估计这个xy应该是dim3定义的
 		__device__ 类函数是在GPU上跑的，只能被__device__类函数或者__global__类函数调用
 
+Chapter05:
+	P81: add<<<N, 1>>>: N个block，1个进程（thread）
+		= N个并行进程
+	
+	P82:add<<<1,N>>> 
+		把tid = blockIdx.x 改成tid = threadIdx.x
+	
+	P84:block上限65535, thread per block上限512
+
+	add_loop_long_blocks.cu:
+		add:
+			int tid = threadIdx.x + blockIdx.x * blockDim.x;
+		main:
+			add<<<128,128>>>
+
+		
+		这里有两个变量：
+		blockIdx.x是block的行坐标。就是第1行第几个block
+		threadIdx.x这个是block内部的进程号
+	
+		还有两个定量：
+		假如我用<<<128,128>>>
+		blockDim.x是一个block里有多少个thread,这里就是128
+		gridDim.x是一个grid里有多少个block，这里也是128
+		这个可能是因为block和grid都是一维的，假如以后有什么办法能声明成三维，那么这个量肯定会更大。但是现在不知道会如何，至少5/20/2020这天我不知道.
+		以上信息都是我自己在add函数里用printf打出来的
+	
+	julia_gpu.cu:
+		kernel:
+			int offset = x + y * gridDim.x;
+		这个gridDim代表着一个grid里有多少个block
+		这个意思暂时不明，大概是dim3    grid(DIM,DIM);里的DIM×DIM
+		例子在P88，还要看	
+
+		P100: __syncthreads()并行	
+
+Chapter06:
 
